@@ -1,6 +1,4 @@
-from flask import Flask, render_template_string, render_template, jsonify
-from flask import render_template
-from flask import json
+from flask import *
 from urllib.request import urlopen
 import sqlite3
                                                                                                                                        
@@ -71,6 +69,24 @@ def read_fiche_by_name(client_name):
 def register():
     return render_template('register.html')
 
+@app.route('/enregistrer_client', methods=['POST'])
+def enregistrer_client():
+    if request.method == 'POST':
+        nom = request.form['nom']
+        prenom = request.form['prenom']
+        email = request.form['email']
+        telephone = request.form['telephone']
+
+        # Insérer les données dans la base de données (à compléter selon votre schéma de base de données)
+        conn = sqlite3.connect('database.db')
+        cursor = conn.cursor()
+        cursor.execute('INSERT INTO clients (nom, prenom, email, telephone) VALUES (?, ?, ?, ?)', (nom, prenom, email, telephone))
+        conn.commit()
+        conn.close()
+
+        return redirect('/fiche_client/' + nom)  # Rediriger vers la page de détails du client nouvellement enregistré
+
+    return render_template('formulaire_enregistrement.html')
 
                                                                                                                                        
 if __name__ == "__main__":
