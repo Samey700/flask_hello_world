@@ -67,6 +67,10 @@ def read_fiche_by_name(client_name):
     # Rendre le template HTML et transmettre les données
     return render_template('read_data.html', data=data)
 
+@app.route('/register')
+def register():
+    return render_template('register.html')
+
 
                                                                                                                                        
 if __name__ == "__main__":
