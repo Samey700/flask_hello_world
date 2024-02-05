@@ -74,13 +74,12 @@ def enregistrer_client():
     if request.method == 'POST':
         nom = request.form['nom']
         prenom = request.form['prenom']
-        email = request.form['email']
-        telephone = request.form['telephone']
+        email = request.form['adresse']
 
         # Insérer les données dans la base de données (à compléter selon votre schéma de base de données)
         conn = sqlite3.connect('database.db')
         cursor = conn.cursor()
-        cursor.execute('INSERT INTO clients (nom, prenom, email, telephone) VALUES (?, ?, ?, ?)', (nom, prenom, email, telephone))
+        cursor.execute('INSERT INTO clients (nom, prenom, adresse) VALUES (?, ?, ?, ?)', (nom, prenom, adresse)
         conn.commit()
         conn.close()
 
