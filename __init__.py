@@ -31,7 +31,7 @@ def mongraphique():
     return render_template("graphique.html")
 
 @app.route("/wesh/")
-def mongraphique():
+def mongraphique2():
     return render_template("histogramme.html")
                                                                                                                                        
 if __name__ == "__main__":
