@@ -65,16 +65,12 @@ def read_fiche_by_name(client_name):
     # Rendre le template HTML et transmettre les données
     return render_template('read_data.html', data=data)
 
-@app.route('/register')
+@app.route('/register', methods=['POST'])
 def register():
-    return render_template('register.html')
-
-@app.route('/enregistrer_client', methods=['POST'])
-def enregistrer_client():
     if request.method == 'POST':
         nom = request.form['nom']
         prenom = request.form['prenom']
-        email = request.form['adresse']
+        adresse = request.form['adresse']
 
         # Insérer les données dans la base de données (à compléter selon votre schéma de base de données)
         conn = sqlite3.connect('database.db')
@@ -85,7 +81,7 @@ def enregistrer_client():
 
         return redirect('/fiche_client/' + nom)  # Rediriger vers la page de détails du client nouvellement enregistré
 
-    return render_template('formulaire_enregistrement.html')
+    return render_template('register.html')
 
                                                                                                                                        
 if __name__ == "__main__":
